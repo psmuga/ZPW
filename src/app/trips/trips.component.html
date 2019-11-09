@@ -1,0 +1,35 @@
+
+<div class="myContainer">
+  <mat-card class="card" *ngFor="let item of trips" 
+    [class.bColor]="item.capacity - item.capacityUsed <= 3"
+    [class.low]="item.cost == getLowCost()"
+    [class.high]="item.cost == getHighCost()"
+  >
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{item.name | uppercase}}</mat-card-title>
+        <mat-card-subtitle>{{item.cost | currency: 'PLN '}}</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-title-group>
+        <mat-card-title>{{item.country | uppercase}}</mat-card-title>
+      </mat-card-title-group>
+    </mat-card-header>
+    <img mat-card-image src="{{item.photoLink}}">
+    <mat-card-content>
+      <p>{{item.description}}</p>
+      <mat-card-subtitle class="badge badge-success" *ngIf="item.capacity - item.capacityUsed > 0">{{item.capacity - item.capacityUsed}} free spot</mat-card-subtitle>
+      <mat-card-subtitle class="badge badge-danger" *ngIf="item.capacity - item.capacityUsed == 0">No free spot</mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="add(item)" [hidden]="item.capacityUsed == item.capacity">+</button>
+      <button mat-button (click)="resign(item)" [hidden]="item.capacityUsed == 0">-</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<mat-card class="total"
+  [class.green]="getTotalSale() >= 10"
+  [class.red]="getTotalSale() < 10"
+>
+  Total trips sell: <span class="badge badge-light">{{getTotalSale()}}</span>
+</mat-card>
