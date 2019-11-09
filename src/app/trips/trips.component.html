@@ -1,4 +1,5 @@
 
+<app-header></app-header>
 <div class="myContainer">
   <mat-card class="card" *ngFor="let item of trips" 
     [class.bColor]="item.capacity - item.capacityUsed <= 3"
@@ -27,9 +28,22 @@
   </mat-card>
 </div>
 
-<mat-card class="total"
+<!-- <mat-card class="total"
   [class.green]="getTotalSale() >= 10"
   [class.red]="getTotalSale() < 10"
 >
   Total trips sell: <span class="badge badge-light">{{getTotalSale()}}</span>
-</mat-card>
+</mat-card> -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>
+          Total trips sell: 
+          <span class="badge badge-light" 
+            [class.green]="getTotalSale() >= 10"
+            [class.red]="getTotalSale() < 10"
+          >
+            {{getTotalSale()}}
+          </span>
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
