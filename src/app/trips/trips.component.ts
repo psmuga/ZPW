@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Trip } from 'src/models/trip';
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TripsComponent implements OnInit {
   trips: Trip[];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.trips = [
@@ -20,7 +20,8 @@ export class TripsComponent implements OnInit {
         cost: 1000,
         capacity: 15,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/poland.jpg'
       },
       {
@@ -31,7 +32,8 @@ export class TripsComponent implements OnInit {
         cost: 3000,
         capacity: 40,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/england.jpg'
       },
       {
@@ -42,7 +44,8 @@ export class TripsComponent implements OnInit {
         cost: 4000,
         capacity: 10,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/spain.jpg'
       },
       {
@@ -53,7 +56,8 @@ export class TripsComponent implements OnInit {
         cost: 2000,
         capacity: 20,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/greece.jpg'
       },
       {
@@ -64,7 +68,8 @@ export class TripsComponent implements OnInit {
         cost: 5000,
         capacity: 40,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/bali.jpg'
       },
       {
@@ -75,7 +80,8 @@ export class TripsComponent implements OnInit {
         cost: 3000,
         capacity: 40,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/austria.jpg'
       },
       {
@@ -86,7 +92,8 @@ export class TripsComponent implements OnInit {
         cost: 7000,
         capacity: 40,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/bora.jpg'
       },
       {
@@ -97,18 +104,13 @@ export class TripsComponent implements OnInit {
         cost: 7000,
         capacity: 40,
         capacityUsed: 0,
-        description: 'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
+        description:
+          'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
         photoLink: '../../assets/usa.jpg'
       }
-    ]
+    ];
   }
 
-  add(item: Trip): void {
-    item.capacityUsed += 1;
-  }
-  resign(item: Trip): void {
-    item.capacityUsed -= 1;
-  }
   getHighCost(): number {
     return Math.max.apply(Math, this.trips.map(o => o.cost));
   }
@@ -116,18 +118,12 @@ export class TripsComponent implements OnInit {
     return Math.min.apply(Math, this.trips.map(o => o.cost));
   }
   getTotalSale(): number {
-    return this.trips.map(item => item.capacityUsed).reduce((prev, cur) => prev + cur);
+    return this.trips
+      .map(item => item.capacityUsed)
+      .reduce((prev, cur) => prev + cur);
   }
-}
 
-interface Trip {
-  name: string;
-  country: string;
-  startDate: Date;
-  endDate: Date;
-  cost: number;
-  capacity: number;
-  description: string;
-  photoLink: string;
-  capacityUsed: number;
+  onDeleted($event) {
+    this.trips = this.trips.filter(value => value.name !== $event);
+  }
 }
