@@ -8,4 +8,5 @@ export interface Trip {
   description: string;
   photoLink: string;
   capacityUsed: number;
+  totalStar: number;
 }

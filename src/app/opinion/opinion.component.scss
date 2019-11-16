@@ -1,0 +1,14 @@
+mat-slider {
+    width: 100%;
+}
+mat-chip-list {
+    padding-left: 10px;
+}
+mat-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    mat-chip {
+        margin-left: 1em;
+    }
+}

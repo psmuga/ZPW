@@ -11,10 +11,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
 import { TripComponent } from './trip/trip.component';
+import { OpinionComponent } from './opinion/opinion.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
-  declarations: [AppComponent, TripsComponent, HeaderComponent, TripComponent],
+  declarations: [
+    AppComponent,
+    TripsComponent,
+    HeaderComponent,
+    TripComponent,
+    OpinionComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +31,9 @@ import { TripComponent } from './trip/trip.component';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatSliderModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

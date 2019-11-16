@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    Your Opinion 
+    <mat-chip [hidden]="settings.value < 0" color="accent" selected>{{settings.value}}</mat-chip>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-slider [max]="settings.max" [min]="settings.min" [step]="settings.step" [thumbLabel]="settings.thumbLabel"
+      [value]="settings.value" (input)="settings.value = $event.value" (click)="vote()"></mat-slider>
+  </mat-card-content>
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip>
+      Total star:
+      <mat-chip>{{totalStar / index}}
+      </mat-chip>
+    </mat-chip>
+  </mat-chip-list>
+</mat-card>

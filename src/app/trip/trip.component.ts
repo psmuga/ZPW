@@ -11,6 +11,7 @@ export class TripComponent implements OnInit {
   @Input() max: number;
   @Input() min: number;
   @Output() deleted = new EventEmitter<string>();
+  counter: 0;
   constructor() { }
 
   ngOnInit() {
@@ -24,5 +25,9 @@ export class TripComponent implements OnInit {
   }
   removeTrip() {
     this.deleted.emit(this.trip.name);
+  }
+  onVoted($event) {
+    this.counter++;
+    this.trip.totalStar += $event;
   }
 }

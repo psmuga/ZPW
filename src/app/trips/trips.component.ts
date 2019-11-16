@@ -22,7 +22,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/poland.jpg'
+        photoLink: '../../assets/poland.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 2',
@@ -34,7 +35,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/england.jpg'
+        photoLink: '../../assets/england.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 3',
@@ -46,7 +48,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/spain.jpg'
+        photoLink: '../../assets/spain.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 4',
@@ -58,7 +61,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/greece.jpg'
+        photoLink: '../../assets/greece.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 5',
@@ -70,7 +74,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/bali.jpg'
+        photoLink: '../../assets/bali.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 6',
@@ -82,7 +87,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/austria.jpg'
+        photoLink: '../../assets/austria.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 7',
@@ -94,7 +100,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/bora.jpg'
+        photoLink: '../../assets/bora.jpg',
+        totalStar: 0
       },
       {
         name: 'Trip 8',
@@ -106,7 +113,8 @@ export class TripsComponent implements OnInit {
         capacityUsed: 0,
         description:
           'Et nulla culpa quis adipisicing do cupidatat tempor eu officia adipisicing ipsum.',
-        photoLink: '../../assets/usa.jpg'
+        photoLink: '../../assets/usa.jpg',
+        totalStar: 0
       }
     ];
   }
