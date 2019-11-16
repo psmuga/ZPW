@@ -11,7 +11,7 @@ export class OpinionComponent implements OnInit {
   @Input() totalStar: number;
   @Output() voted = new EventEmitter<number>();
   index = 0;
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.settings = {
@@ -26,5 +26,9 @@ export class OpinionComponent implements OnInit {
   vote() {
     this.index++;
     this.voted.emit(this.settings.value);
+  }
+  getTotalStars() {
+    const result = this.totalStar / this.index;
+    return Number.isNaN(result) ? 0 : result;
   }
 }

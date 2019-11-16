@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    Your Opinion 
+    Your Opinion
     <mat-chip [hidden]="settings.value < 0" color="accent" selected>{{settings.value}}</mat-chip>
   </mat-card-header>
   <mat-card-content>
@@ -10,8 +10,7 @@
   <mat-chip-list aria-label="Fish selection">
     <mat-chip>
       Total star:
-      <mat-chip>{{totalStar / index}}
-      </mat-chip>
+      <mat-chip>{{getTotalStars()}}</mat-chip>
     </mat-chip>
   </mat-chip-list>
 </mat-card>
