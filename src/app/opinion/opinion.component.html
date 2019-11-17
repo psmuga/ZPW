@@ -10,7 +10,7 @@
   <mat-chip-list aria-label="Fish selection">
     <mat-chip>
       Total star:
-      <mat-chip>{{getTotalStars()}}</mat-chip>
+      <mat-chip>{{getTotalStars() | number: '1.0-1'}}</mat-chip>
     </mat-chip>
   </mat-chip-list>
 </mat-card>
