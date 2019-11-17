@@ -1,6 +1,8 @@
 import { TripsService } from './../../services/trips-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/models/trip';
+import { MatDialog } from '@angular/material/dialog';
+import { NewTripComponent } from '../newTrip/newTrip.component';
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',
@@ -9,7 +11,7 @@ import { Trip } from 'src/models/trip';
 export class TripsComponent implements OnInit {
   trips: Trip[];
 
-  constructor(private tripsService: TripsService) {}
+  constructor(private tripsService: TripsService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getProducts();
@@ -30,8 +32,17 @@ export class TripsComponent implements OnInit {
       .map(item => item.capacityUsed)
       .reduce((prev, cur) => prev + cur);
   }
-
   onDeleted($event) {
-    this.trips = this.trips.filter(value => value.name !== $event);
+    this.trips = this.trips.filter(value => value.id !== $event);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NewTripComponent, {
+      width: '50em'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

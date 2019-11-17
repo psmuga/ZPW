@@ -4,6 +4,11 @@
   <app-trip *ngFor="let item of trips" [trip]="item" [max]="getHighCost()" [min]="getLowCost()" (deleted)="onDeleted($event)"></app-trip>
 </div>
 
+<div class="add">
+    <button mat-fab color="warn" (click)="openDialog()">+</button>
+</div>
+
+
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>

@@ -15,6 +15,12 @@ import { MatSliderModule } from '@angular/material/slider';
 import { TripComponent } from './trip/trip.component';
 import { OpinionComponent } from './opinion/opinion.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { NewTripComponent } from './newTrip/newTrip.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,8 +28,10 @@ import { MatChipsModule } from '@angular/material/chips';
     TripsComponent,
     HeaderComponent,
     TripComponent,
-    OpinionComponent
+    OpinionComponent,
+    NewTripComponent
   ],
+  entryComponents: [NewTripComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,7 +41,13 @@ import { MatChipsModule } from '@angular/material/chips';
     MatToolbarModule,
     MatIconModule,
     MatSliderModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Add new trip</h1>
+<div mat-dialog-content>
+  <form [formGroup]="tripForm">
+    <mat-form-field>
+      <input matInput placeholder="Trip name" type="text" required formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Country" type="text" required formControlName="country">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Amount" type="number" class="example-right-align" required formControlName="amount">
+      <span matPrefix>PLN&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Capacity" type="number" required formControlName="capacity">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description" type="text" required formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Start date" type="date" required formControlName="start">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="End date" type="date" required formControlName="end">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Photo" type="url" required formControlName="photo">
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-button (click)="add()" [disabled]="!tripForm.valid">Add</button>
+</div>

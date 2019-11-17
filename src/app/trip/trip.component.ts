@@ -10,7 +10,7 @@ export class TripComponent implements OnInit {
   @Input() trip: Trip;
   @Input() max: number;
   @Input() min: number;
-  @Output() deleted = new EventEmitter<string>();
+  @Output() deleted = new EventEmitter<number>();
   counter: 0;
   constructor() { }
 
@@ -24,7 +24,7 @@ export class TripComponent implements OnInit {
     this.trip.capacityUsed -= 1;
   }
   removeTrip() {
-    this.deleted.emit(this.trip.name);
+    this.deleted.emit(this.trip.id);
   }
   onVoted($event) {
     this.counter++;
