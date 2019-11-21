@@ -1,15 +1,17 @@
-<app-header></app-header>
+<app-header (showBucket)="onBucketVisible()"></app-header>
 
-<div class="myContainer">
+<app-bucket *ngIf="isBucketVisible"></app-bucket>
+
+<div class="myContainer" *ngIf="!isBucketVisible">
   <app-trip *ngFor="let item of trips" [trip]="item" [max]="getHighCost()" [min]="getLowCost()" (deleted)="onDeleted($event)"></app-trip>
 </div>
 
-<div class="add">
+<div class="add" *ngIf="!isBucketVisible">
     <button mat-fab color="warn" (click)="openDialog()">+</button>
 </div>
 
 
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="!isBucketVisible">
   <mat-toolbar-row>
     <span>
       Total trips sell:

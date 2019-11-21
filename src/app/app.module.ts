@@ -20,36 +20,42 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FormGroup, FormControl } from '@angular/forms';
+import { BucketComponent } from './bucket/bucket.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TripsComponent,
-    HeaderComponent,
-    TripComponent,
-    OpinionComponent,
-    NewTripComponent
-  ],
-  entryComponents: [NewTripComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSliderModule,
-    MatChipsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      TripsComponent,
+      HeaderComponent,
+      TripComponent,
+      OpinionComponent,
+      NewTripComponent,
+      BucketComponent
+   ],
+   entryComponents: [
+      NewTripComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      MatCardModule,
+      MatButtonModule,
+      MatToolbarModule,
+      MatIconModule,
+      MatSliderModule,
+      MatChipsModule,
+      MatDialogModule,
+      MatFormFieldModule,
+      MatInputModule,
+      ReactiveFormsModule,
+      FormsModule,
+      MatSnackBarModule
+   ],
+   providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule {}
