@@ -17,7 +17,9 @@ export class BasketService {
     return this.saleTrips.find(({ id }) => id === item);
   }
   addProduct(trip: Trip) {
-    this.saleTrips.push(trip);
+    if (this.getProduct(trip.id) === undefined) {
+      this.saleTrips.push(trip);
+    }
   }
   deleteProduct(item: number) {
     this.saleTrips = this.saleTrips.filter(element => {
@@ -25,5 +27,14 @@ export class BasketService {
         return element;
       }
     });
+  }
+  updateTrip(item: Trip) {
+    this.saleTrips = this.saleTrips.map(element => {
+      if(element.id == item.id) {
+        return item;
+      } else {
+        return element;
+      }
+    })
   }
 }

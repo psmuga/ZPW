@@ -1,3 +1,4 @@
+import { TripsService } from 'src/services/trips-service.service';
 import { BasketService } from './../../services/basket.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from 'src/models/trip';
@@ -16,7 +17,8 @@ export class TripComponent implements OnInit {
   counter: 0;
   constructor(
     private bucketService: BasketService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private tripService: TripsService
   ) {}
 
   ngOnInit() {}
@@ -28,7 +30,13 @@ export class TripComponent implements OnInit {
   }
   resign(): void {
     this.trip.capacityUsed -= 1;
-    this.bucketService.deleteProduct(this.trip.id);
+    if(this.trip.capacityUsed == 0) {
+      this.bucketService.deleteProduct(this.trip.id);
+      this.tripService.deleteProduct(this.trip.id);
+    } else {
+      this.bucketService.updateTrip(this.trip);
+      this.tripService.updateTrip(this.trip);
+    }
   }
   removeTrip() {
     this.deleted.emit(this.trip.id);

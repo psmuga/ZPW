@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,13 +6,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Output() showBucket = new EventEmitter<boolean>();
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
-  onShowBucket() {
-    this.showBucket.emit();
-  }
+  ngOnInit() {}
 }

@@ -10,7 +10,6 @@ import { NewTripComponent } from '../newTrip/newTrip.component';
 })
 export class TripsComponent implements OnInit {
   trips: Trip[];
-  isBucketVisible = false;
 
   constructor(private tripsService: TripsService, public dialog: MatDialog) {}
 
@@ -45,9 +44,5 @@ export class TripsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-  }
-
-  onBucketVisible() {
-    this.isBucketVisible = !this.isBucketVisible;
   }
 }

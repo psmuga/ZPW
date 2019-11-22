@@ -1,6 +1,6 @@
 import { Trip } from 'src/models/trip';
 import * as uuid from 'uuid'
-export const trips: Trip[] = [
+export let trips: Trip[] = [
   {
     id: uuid.v4(),
     name: 'Trip 1',

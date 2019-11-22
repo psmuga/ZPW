@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>Trips Application</span>
+        <a routerLink="/home" routerLinkActive="active">Trips Application</a>
         <span class="example-spacer"></span>
-        <button mat-flat-button color="primary" (click)="onShowBucket()"><mat-icon aria-hidden="false" aria-label="Example user verified icon">shopping_cart</mat-icon></button>
+        <button mat-flat-button color="primary" routerLink="/basket" routerLinkActive="active"><mat-icon aria-hidden="false" aria-label="Example user verified icon">shopping_cart</mat-icon></button>
         <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
     </mat-toolbar-row>
 </mat-toolbar>
