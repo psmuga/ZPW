@@ -13,8 +13,8 @@ export class TripsService {
   getProducts(): Trip[] {
     return this.trips;
   }
-  getProduct(item: string): Trip {
-    return this.trips.find(({ name }) => name === item);
+  getProduct(item: number): Trip {
+    return this.trips.find(({ id }) => id === item);
   }
   addProduct(trip: Trip) {
     this.trips.push(trip);

@@ -1,16 +1,16 @@
 <mat-card>
   <mat-card-header>
-    Your Opinion
-    <mat-chip [hidden]="settings.value < 0" color="accent" selected>{{settings.value}}</mat-chip>
+      <mat-card-title>
+          <h3>Your rating</h3>
+        </mat-card-title>
+    
   </mat-card-header>
   <mat-card-content>
-    <mat-slider [max]="settings.max" [min]="settings.min" [step]="settings.step" [thumbLabel]="settings.thumbLabel"
-      [value]="settings.value" (input)="settings.value = $event.value" (click)="vote()"></mat-slider>
+      <ngb-rating [max]="settings.max"  [(rate)]="settings.value" [starTemplate]="template"></ngb-rating>
   </mat-card-content>
-  <mat-chip-list aria-label="Fish selection">
-    <mat-chip>
-      Total star:
-      <mat-chip>{{getTotalStars() | number: '1.0-1'}}</mat-chip>
-    </mat-chip>
-  </mat-chip-list>
+ 
 </mat-card>
+
+<ng-template #template let-fill="fill">
+    <mat-icon  class="star"  [class.full]="fill === 100" aria-hidden="false" aria-label="Example user verified icon">star</mat-icon>
+</ng-template>

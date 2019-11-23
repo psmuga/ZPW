@@ -9,13 +9,15 @@
       <mat-card-title>{{trip.country | uppercase}}</mat-card-title>
     </mat-card-title-group>
   </mat-card-header>
-  <img mat-card-image src="{{trip.photoLink}}">
+  <img mat-card-image src="{{trip.photoLink}}" routerLink="/detail/{{trip.id}}">
   <mat-card-content>
     <p>{{trip.description}}</p>
-    <mat-chip color="primary" selected *ngIf="trip.capacity - trip.capacityUsed > 0">
-      {{trip.capacity - trip.capacityUsed}} free spot</mat-chip>
-    <mat-chip color="warn" selected *ngIf="trip.capacity - trip.capacityUsed == 0">No free spot</mat-chip>
-    <app-opinion [totalStar]="trip.totalStar" (voted)="onVoted($event)"></app-opinion>
+    <mat-chip-list>
+        <mat-chip color="primary" selected *ngIf="trip.capacity - trip.capacityUsed > 0">
+            {{trip.capacity - trip.capacityUsed}} free spot</mat-chip>
+          <mat-chip color="warn" selected *ngIf="trip.capacity - trip.capacityUsed == 0">No free spot</mat-chip>
+    </mat-chip-list>
+
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="add()" [hidden]="trip.capacityUsed == trip.capacity">+</button>
@@ -23,5 +25,6 @@
     <button mat-button>
       <mat-icon (click)="removeTrip()" aria-hidden="false" aria-label="Example user verified icon">delete</mat-icon>
     </button>
+    <button mat-button routerLink="/detail/{{trip.id}}" routerLinkActive="active">details</button>
   </mat-card-actions>
 </mat-card>

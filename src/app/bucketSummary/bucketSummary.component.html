@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Your order</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="separator"></div>
+    <h6>Total trips: {{getTotalTrips()}}</h6>
+    <h6>Total cost: {{getTotalCost()}}</h6>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button color="primary" routerLink="/basket" routerLinkActive="active">
+      <mat-icon aria-hidden="false" aria-label="Example user verified icon">details</mat-icon>View details
+    </button>
+  </mat-card-actions>
+</mat-card>

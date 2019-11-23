@@ -1,14 +1,30 @@
 mat-slider {
-    width: 100%;
+  width: 100%;
 }
 mat-chip-list {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 mat-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    mat-chip {
-        margin-left: 1em;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.star {
+  font-size: 2em;
+  color: #d3d3d3;
+}
+.full {
+  color: red;
+}
+ngb-rating {
+  width: 100%;
+  padding-left: 2em;
+  padding-right: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+mat-card {
+    max-width: 15vw;
 }

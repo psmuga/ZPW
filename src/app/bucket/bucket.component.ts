@@ -29,7 +29,10 @@ export class BucketComponent implements OnInit {
   products: Trip[];
   displayedColumns: string[] = ['name', 'price', 'country', 'amount'];
   expandedElement: Trip | null;
-  constructor(private basketService: BasketService, private tripsService: TripsService) {}
+  constructor(
+    private basketService: BasketService,
+    private tripsService: TripsService
+  ) {}
 
   ngOnInit() {
     this.products = this.getProcucts();
@@ -39,13 +42,13 @@ export class BucketComponent implements OnInit {
   }
   resign(product: Trip) {
     this.basketService.deleteProduct(product.id);
-    product.capacityUsed =0;
+    product.capacityUsed = 0;
     this.tripsService.updateTrip(product);
     this.products = this.products.filter(item => item !== product);
   }
   removeOne(product: Trip) {
     product.capacityUsed--;
-    if(product.capacityUsed === 0) {
+    if (product.capacityUsed === 0) {
       this.resign(product);
     } else {
       this.tripsService.updateTrip(product);
@@ -55,11 +58,11 @@ export class BucketComponent implements OnInit {
     product.capacityUsed++;
     this.tripsService.updateTrip(product);
   }
-  
+
   getTotalcost() {
-    return this.products.reduce((a, b) => a + b.cost, 0);
+    return this.products.reduce((a, b) => a + b.cost * b.capacityUsed, 0);
   }
   getTotalTrips() {
-    return this.products.reduce((a,b) => a + b.capacityUsed,0);
+    return this.products.reduce((a, b) => a + b.capacityUsed, 0);
   }
 }

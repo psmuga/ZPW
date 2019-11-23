@@ -4,7 +4,6 @@ import { TripsService } from 'src/services/trips-service.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
 import { Trip } from 'src/models/trip';
-import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-newTrip',
@@ -33,7 +32,8 @@ export class NewTripComponent implements OnInit {
     this.dialogRef.close();
   }
   add() {
-    const ID = uuid.v4();
+    const trips = this.tripsService.getProducts();
+    const ID = trips[trips.length - 1].id + 1;
     const newTrip: Trip = {
       id: ID,
       name: this.tripForm.value.name,

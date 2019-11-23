@@ -1,14 +1,18 @@
 
-
-
-
-<div class="myContainer">
-  <app-trip *ngFor="let item of trips" [trip]="item" [max]="getHighCost()" [min]="getLowCost()" (deleted)="onDeleted($event)"></app-trip>
+<div class="view">
+    <div class="myContainer">
+        <app-trip *ngFor="let item of trips" [trip]="item" [max]="getHighCost()" [min]="getLowCost()" (deleted)="onDeleted($event)"></app-trip>
+        
+      </div>
+      <app-bucketSummary></app-bucketSummary>
+      
+      <div class="add">
+          <button mat-fab color="warn" (click)="openDialog()">+</button>
+      </div>
+      
 </div>
 
-<div class="add">
-    <button mat-fab color="warn" (click)="openDialog()">+</button>
-</div>
+
 
 
 <mat-toolbar color="primary">

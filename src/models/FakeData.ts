@@ -1,8 +1,7 @@
 import { Trip } from 'src/models/trip';
-import * as uuid from 'uuid'
 export let trips: Trip[] = [
   {
-    id: uuid.v4(),
+    id: 0,
     name: 'Trip 1',
     country: 'Poland',
     startDate: new Date(),
@@ -16,7 +15,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 1,
     name: 'Trip 2',
     country: 'England',
     startDate: new Date(),
@@ -30,7 +29,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 2,
     name: 'Trip 3',
     country: 'Spain',
     startDate: new Date(),
@@ -44,7 +43,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 3,
     name: 'Trip 4',
     country: 'Greece',
     startDate: new Date(),
@@ -58,7 +57,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 4,
     name: 'Trip 5',
     country: 'Bali',
     startDate: new Date(),
@@ -72,7 +71,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 5,
     name: 'Trip 6',
     country: 'Austria',
     startDate: new Date(),
@@ -86,7 +85,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 6,
     name: 'Trip 7',
     country: 'Bora Bora',
     startDate: new Date(),
@@ -100,7 +99,7 @@ export let trips: Trip[] = [
     totalStar: 0
   },
   {
-    id: uuid.v4(),
+    id: 7,
     name: 'Trip 8',
     country: 'USA',
     startDate: new Date(),
