@@ -19,9 +19,13 @@ export class TripsService {
   addProduct(trip: Trip) {
     this.trips.push(trip);
   }
-  deleteProduct(item: number) {
-    const index = this.trips.findIndex(({ id }) => id === item);
-    this.trips.slice(index, index + 1);
+  deleteProduct(id: number) {
+    // const index = this.trips.findIndex(({ id }) => id === item);
+    // this.trips.slice(index, index + 1);
+
+    this.trips = this.trips.filter(item => {
+      return item.id !=id;
+    })
   }
   updateTrip(item: Trip) {
     this.trips = this.trips.map(element => {

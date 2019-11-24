@@ -1,16 +1,50 @@
-<mat-card>
-  <mat-card-header>
-      <mat-card-title>
-          <h3>Your rating</h3>
-        </mat-card-title>
-    
-  </mat-card-header>
-  <mat-card-content>
-      <ngb-rating [max]="settings.max"  [(rate)]="settings.value" [starTemplate]="template"></ngb-rating>
-  </mat-card-content>
- 
-</mat-card>
-
 <ng-template #template let-fill="fill">
-    <mat-icon  class="star"  [class.full]="fill === 100" aria-hidden="false" aria-label="Example user verified icon">star</mat-icon>
+  <mat-icon class="star" [class.full]="fill === 100" aria-hidden="false" aria-label="Example user verified icon" >star
+  </mat-icon>
 </ng-template>
+    <mat-card class="comment" *ngFor="let item of opinions">
+        <mat-card-header>
+            <mat-card-title>
+              <h3>{{item.author}}</h3>
+            </mat-card-title>
+            <mat-card-subtitle>{{item.time | date}}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            {{item.comment}}
+          </mat-card-content>
+    </mat-card>
+
+
+<div class="opinion">
+  <mat-card class="com">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Your opinion</h3>
+      </mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content [formGroup]="opinionForm">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Leave a comment" formControlName="coment" required></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="onCreateComment()" [disabled]="!opinionForm.valid">comment
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="rating">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Your rating</h3>
+      </mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+      <ngb-rating [max]="settings.max" [(rate)]="star" [starTemplate]="template"  (rateChange)="addStar()" ></ngb-rating>
+    </mat-card-content>
+
+  </mat-card>
+
+</div> 

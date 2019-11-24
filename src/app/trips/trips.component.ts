@@ -33,6 +33,7 @@ export class TripsComponent implements OnInit {
       .reduce((prev, cur) => prev + cur);
   }
   onDeleted($event) {
+    this.tripsService.deleteProduct($event);
     this.trips = this.trips.filter(value => value.id !== $event);
   }
 

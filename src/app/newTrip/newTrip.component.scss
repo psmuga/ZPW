@@ -2,3 +2,12 @@ form {
     display: flex;
     flex-direction: column;
 }
+.tog {
+    display: flex;
+    mat-form-field {
+        width: 50%;
+        &:first-child {
+            margin-right: 1em;
+        }
+    }
+}
