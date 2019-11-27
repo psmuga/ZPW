@@ -1,7 +1,7 @@
 
 <div class="view">
     <div class="myContainer">
-        <app-trip *ngFor="let item of trips" [trip]="item" [max]="getHighCost()" [min]="getLowCost()" (deleted)="onDeleted($event)"></app-trip>
+        <app-trip *ngFor="let item of trips" [trip]="item" (deleted)="onDeleted($event)"></app-trip>
         
       </div>
       <app-bucketSummary></app-bucketSummary>
@@ -19,8 +19,8 @@
   <mat-toolbar-row>
     <span>
       Total trips sell:
-      <span class="badge badge-light" [class.green]="getTotalSale() >= 10" [class.red]="getTotalSale() < 10">
-        {{getTotalSale()}}
+      <span class="badge badge-light" [class.green]="totalSale >= 10" [class.red]="totalSale < 10">
+        {{totalSale}}
       </span>
     </span>
   </mat-toolbar-row>

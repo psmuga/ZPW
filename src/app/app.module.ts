@@ -25,49 +25,52 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DetailTripComponent } from './detailTrip/detailTrip.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BucketSummaryComponent } from './bucketSummary/bucketSummary.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { HttpClientModule } from '@angular/common/http';
+import { InMemoryDataService } from 'src/services/InMemoryData.service';
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      TripsComponent,
-      HeaderComponent,
-      TripComponent,
-      OpinionComponent,
-      NewTripComponent,
-      BucketComponent,
-      DetailTripComponent,
-      BucketSummaryComponent
-   ],
-   entryComponents: [
-      NewTripComponent
-   ],
-   imports: [
-      BrowserModule,
-      AppRoutingModule,
-      BrowserAnimationsModule,
-      MatCardModule,
-      MatButtonModule,
-      MatToolbarModule,
-      MatIconModule,
-      MatSliderModule,
-      MatChipsModule,
-      MatDialogModule,
-      MatFormFieldModule,
-      MatInputModule,
-      ReactiveFormsModule,
-      FormsModule,
-      MatSnackBarModule,
-      MatTableModule,
-      MatGridListModule,
-      NgbModule,
-      MatListModule
-   ],
-   providers: [],
-   bootstrap: [
-      AppComponent
-   ]
+  declarations: [
+    AppComponent,
+    TripsComponent,
+    HeaderComponent,
+    TripComponent,
+    OpinionComponent,
+    NewTripComponent,
+    BucketComponent,
+    DetailTripComponent,
+    BucketSummaryComponent
+  ],
+  entryComponents: [NewTripComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSliderModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatGridListModule,
+    NgbModule,
+    MatListModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

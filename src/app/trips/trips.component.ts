@@ -1,5 +1,5 @@
 import { TripsService } from './../../services/trips-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Trip } from 'src/models/trip';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTripComponent } from '../newTrip/newTrip.component';
@@ -8,17 +8,21 @@ import { NewTripComponent } from '../newTrip/newTrip.component';
   templateUrl: './trips.component.html',
   styleUrls: ['./trips.component.scss']
 })
-export class TripsComponent implements OnInit {
+export class TripsComponent implements OnInit, OnChanges {
   trips: Trip[];
-
-  constructor(private tripsService: TripsService, public dialog: MatDialog) {}
+  totalSale = 0;
+  constructor(private tripsService: TripsService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.getProducts();
+
+  }
+  ngOnChanges(changes: SimpleChanges): void {
     this.getProducts();
   }
 
   getProducts() {
-    this.trips = this.tripsService.getProducts();
+    this.tripsService.getProducts().subscribe(trips => {this.trips = trips; this.getTotalSale()});
   }
 
   getHighCost(): number {
@@ -27,14 +31,14 @@ export class TripsComponent implements OnInit {
   getLowCost(): number {
     return Math.min.apply(Math, this.trips.map(o => o.cost));
   }
-  getTotalSale(): number {
-    return this.trips
+  getTotalSale() {
+    this.totalSale = this.trips
       .map(item => item.capacityUsed)
       .reduce((prev, cur) => prev + cur);
   }
   onDeleted($event) {
-    this.tripsService.deleteProduct($event);
-    this.trips = this.trips.filter(value => value.id !== $event);
+    this.tripsService.deleteProduct($event).subscribe(_ => this.trips = this.trips.filter(value => value.id !== $event))
+
   }
 
   openDialog(): void {
@@ -43,7 +47,7 @@ export class TripsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.getProducts();
     });
   }
 }

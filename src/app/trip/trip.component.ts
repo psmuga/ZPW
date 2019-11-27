@@ -25,18 +25,20 @@ export class TripComponent implements OnInit {
 
   add(): void {
     this.trip.capacityUsed += 1;
+    this.tripService
+      .updateTrip(this.trip)
+      .subscribe(_ =>
+        this.snackBar.open('Added 1 item to bucket!', 'OK', { duration: 2000 })
+      );
     this.bucketService.addProduct(this.trip);
-    this.snackBar.open('Added 1 item to bucket!', 'OK', { duration: 2000 });
   }
   resign(): void {
     this.trip.capacityUsed -= 1;
-    if(this.trip.capacityUsed == 0) {
+    if(this.trip.capacityUsed == 0){
       this.bucketService.deleteProduct(this.trip.id);
-      this.tripService.deleteProduct(this.trip.id);
-    } else {
-      this.bucketService.updateTrip(this.trip);
-      this.tripService.updateTrip(this.trip);
     }
+    this.bucketService.updateTrip(this.trip);
+    this.tripService.updateTrip(this.trip).subscribe();
   }
   removeTrip() {
     this.deleted.emit(this.trip.id);

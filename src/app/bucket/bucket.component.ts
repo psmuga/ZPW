@@ -9,6 +9,7 @@ import {
   transition,
   animate
 } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bucket',
@@ -31,7 +32,8 @@ export class BucketComponent implements OnInit {
   expandedElement: Trip | null;
   constructor(
     private basketService: BasketService,
-    private tripsService: TripsService
+    private tripsService: TripsService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class BucketComponent implements OnInit {
   resign(product: Trip) {
     this.basketService.deleteProduct(product.id);
     product.capacityUsed = 0;
-    this.tripsService.updateTrip(product);
+    this.tripsService.updateTrip(product).subscribe();
     this.products = this.products.filter(item => item !== product);
   }
   removeOne(product: Trip) {
@@ -51,12 +53,12 @@ export class BucketComponent implements OnInit {
     if (product.capacityUsed === 0) {
       this.resign(product);
     } else {
-      this.tripsService.updateTrip(product);
+      this.tripsService.updateTrip(product).subscribe();
     }
   }
   addOne(product: Trip) {
     product.capacityUsed++;
-    this.tripsService.updateTrip(product);
+    this.tripsService.updateTrip(product).subscribe(_ => this.snackBar.open('Added 1 more product!', 'OK', { duration: 2000 }));
   }
 
   getTotalcost() {

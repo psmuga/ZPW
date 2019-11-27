@@ -32,10 +32,7 @@ export class NewTripComponent implements OnInit {
     this.dialogRef.close();
   }
   add() {
-    const trips = this.tripsService.getProducts();
-    const ID = trips[trips.length - 1].id + 1;
     const newTrip: Trip = {
-      id: ID,
       name: this.tripForm.value.name,
       capacity: this.tripForm.value.capacity,
       capacityUsed: 0,
@@ -47,7 +44,8 @@ export class NewTripComponent implements OnInit {
       endDate: this.tripForm.value.end,
       photoLink: this.tripForm.value.photo
     };
-    this.tripsService.addProduct(newTrip);
-    this.dialogRef.close();
+    this.tripsService
+      .addProduct(newTrip)
+      .subscribe(_ => this.dialogRef.close());
   }
 }

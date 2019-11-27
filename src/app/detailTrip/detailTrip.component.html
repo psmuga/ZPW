@@ -33,9 +33,9 @@
         <button mat-button>
           <mat-icon (click)="removeTrip()" aria-hidden="false" aria-label="Example user verified icon" routerLink="/home" routerLinkActive="active">delete</mat-icon>
         </button>
-        <mat-chip color="primary" selected *ngIf="trip.capacity - trip.capacityUsed > 0">
-            {{trip.capacity - trip.capacityUsed}} free spot</mat-chip>
-        <mat-chip color="warn" selected *ngIf="trip.capacity - trip.capacityUsed == 0">No free spot</mat-chip>
+        <mat-chip color="primary" selected *ngIf="sellPlaces > 0">
+            {{sellPlaces}} free spot</mat-chip>
+        <mat-chip color="warn" selected *ngIf="sellPlaces == 0">No free spot</mat-chip>
         <mat-chip>
           Total star:
           <mat-chip>{{totalStar | number: '1.0-1'}}</mat-chip>

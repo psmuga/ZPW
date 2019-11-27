@@ -9,5 +9,5 @@ export interface Trip {
   photoLink: string;
   capacityUsed: number;
   totalStar: number;
-  id: number;
+  id?: number;
 }

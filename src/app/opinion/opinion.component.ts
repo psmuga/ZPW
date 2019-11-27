@@ -1,6 +1,6 @@
 import { Star } from './../../models/opinion';
 import { Trip } from './../../models/trip';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { OpinionConfig, Opinion } from 'src/models/opinion';
 import { OpinionService } from 'src/services/Opinion.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
@@ -18,9 +18,9 @@ export class OpinionComponent implements OnInit {
     coment: new FormControl('', Validators.required)
   });
   star = 0;
-  stars: Star[];
+  stars: Star[] = [];
   index = 0;
-  opinions: Opinion[];
+  opinions: Opinion[] =[];
   constructor(private opinionService: OpinionService) {}
 
   ngOnInit() {
@@ -30,17 +30,21 @@ export class OpinionComponent implements OnInit {
     };
     this.getOpinions();
     this.getStars();
-    this.totalS.emit(this.getTotalStars());
   }
 
   getOpinions() {
-    this.opinions = this.opinionService.getOpinions(this.trip.id);
+    this.opinionService.getOpinions(this.trip.id).subscribe(data => {
+      this.opinions = data || [];
+    });
   }
   getStars() {
-    this.stars = this.opinionService.getStars(this.trip.id);
-    if (this.stars[0]) {
-      this.star = this.stars[0].star;
-    }
+    this.opinionService.getStars(this.trip.id).subscribe(data => {
+      this.stars = data;
+      if (this.stars[0]) {
+        this.star = this.stars[0].star;
+      }
+      this.totalS.emit(this.getTotalStars());
+    });
   }
 
   addStar() {
@@ -49,9 +53,10 @@ export class OpinionComponent implements OnInit {
       id: this.trip.id,
       star: this.star
     };
-    this.opinionService.addStar(st);
-    this.stars.push(st);
-    this.totalS.emit(this.getTotalStars());
+    this.opinionService.addStar(st).subscribe(_ => {
+      this.stars.push(st);
+      this.totalS.emit(this.getTotalStars());
+    })
   }
 
   getTotalStars() {
@@ -67,8 +72,7 @@ export class OpinionComponent implements OnInit {
       comment: this.opinionForm.value.coment,
       id: this.trip.id
     };
-    this.opinions.push(opinion);
     this.opinionService.addOpinion(opinion);
-    this.opinionForm.reset();
+    this.opinions.push(opinion); this.opinionForm.reset()
   }
 }

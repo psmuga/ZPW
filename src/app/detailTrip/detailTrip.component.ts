@@ -1,7 +1,7 @@
 import { Star } from './../../models/opinion';
 import { Trip } from './../../models/trip';
 import { TripsService } from 'src/services/trips-service.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OpinionService } from 'src/services/Opinion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,12 +12,13 @@ import { BasketService } from 'src/services/basket.service';
   templateUrl: './detailTrip.component.html',
   styleUrls: ['./detailTrip.component.scss']
 })
-export class DetailTripComponent implements OnInit, OnDestroy {
+export class DetailTripComponent implements OnInit, OnChanges {
+  
   trip: Trip;
   id: number;
-  sub: any;
   stars: Star[];
-  totalStar =0;
+  totalStar = 0;
+  sellPlaces = -1;
   constructor(
     private tripsService: TripsService,
     private opinionService: OpinionService,
@@ -27,19 +28,24 @@ export class DetailTripComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.trip = this.tripsService.getProduct(+params['id']);
+    this.route.params.subscribe(params => {
+      this.tripsService.getProduct(+params['id']).subscribe(data => {
+        this.trip = data;
+        this.getStars();
+        this.sellPlaces = this.trip.capacity - this.trip.capacityUsed;
+      });
     });
+  }
+  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     this.getStars();
   }
   getStars() {
-    this.stars = this.opinionService.getStars(this.trip.id);
+    this.opinionService
+      .getStars(this.trip.id)
+      .subscribe(data => this.stars = data);
+      console.log("heer")
+      console.log(this.stars)
   }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
 
   onVoted($event) {
     this.totalStar = $event;
@@ -47,13 +53,17 @@ export class DetailTripComponent implements OnInit, OnDestroy {
 
   add(): void {
     this.trip.capacityUsed += 1;
+    this.tripsService
+      .updateTrip(this.trip)
+      .subscribe(_ =>
+        this.snackBar.open('Added 1 item to bucket!', 'OK', { duration: 2000 })
+      );
     this.bucketService.addProduct(this.trip);
-    this.snackBar.open('Added 1 item to bucket!', 'OK', { duration: 2000 });
   }
 
   resign(): void {
     this.trip.capacityUsed -= 1;
-    if(this.trip.capacityUsed == 0) {
+    if (this.trip.capacityUsed == 0) {
       this.bucketService.deleteProduct(this.trip.id);
       this.tripsService.deleteProduct(this.trip.id);
     } else {
