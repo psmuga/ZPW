@@ -1,0 +1,41 @@
+<div class="containerr">
+  <div class="logo">
+    <h1><span class="vote">Travel</span>shop</h1>
+  </div>
+  <mat-card>
+    <mat-card-title>
+      Sign Up
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field>
+        <input class="white" matInput placeholder="Enter your email" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input class="white" matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+          [formControl]="password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon class="icon">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.invalid">{{getErrorPasswordMessage()}}</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input class="white" matInput placeholder="Repeat password" [type]="hide2 ? 'password' : 'text'"
+          [formControl]="repeat" required>
+        <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon class="icon">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="repeat.invalid">{{getErrorRepeatPasswordMessage()}}</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="button" mat-button color="default" rounded="true" data-toggle="modal" data-target="#basicExample" [disabled]="!isValid()"
+        (click)="signUp()" mdbWavesEffect>Create
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

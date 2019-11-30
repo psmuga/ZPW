@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { DetailTripComponent } from './detailTrip/detailTrip.component';
 import { TripsComponent } from './trips/trips.component';
 import { BucketComponent } from './bucket/bucket.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
     { path: 'basket', component: BucketComponent, canActivate: [AuthGuard] },
     { path: 'home', component: TripsComponent, canActivate: [AuthGuard] },
     { path: 'detail/:id', component: DetailTripComponent, canActivate: [AuthGuard] },
+    { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', component: LoginComponent }

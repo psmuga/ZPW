@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { AppComponent } from './app.component';
@@ -50,7 +51,8 @@ import { MatMenuModule } from '@angular/material/menu';
         NewTripComponent,
         OpinionComponent,
         TripComponent,
-        TripsComponent
+        TripsComponent,
+        RegisterComponent
     ],
     entryComponents: [NewTripComponent],
     imports: [

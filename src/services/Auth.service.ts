@@ -42,4 +42,9 @@ export class AuthService {
         this.router.navigate(['login']);
         return this.fireAuth.auth.signOut();
     }
+
+    async googleSignin() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        return firebase.auth().signInWithPopup(provider);
+    }
 }

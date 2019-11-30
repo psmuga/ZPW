@@ -35,4 +35,7 @@ export class LoginComponent implements OnInit {
         this.password.reset();
         this.auth.login(data).then(() => this.router.navigate(['home']));
     }
+    onGoogleLogin() {
+        this.auth.googleSignin().then(() => this.router.navigate(['home']));
+    }
 }
