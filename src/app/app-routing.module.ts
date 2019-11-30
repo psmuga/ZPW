@@ -3,17 +3,20 @@ import { TripsComponent } from './trips/trips.component';
 import { BucketComponent } from './bucket/bucket.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: 'basket', component: BucketComponent },
-  { path: 'home', component: TripsComponent },
-  { path: 'detail/:id', component: DetailTripComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: TripsComponent }
+    { path: 'basket', component: BucketComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: TripsComponent, canActivate: [AuthGuard] },
+    { path: 'detail/:id', component: DetailTripComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {}

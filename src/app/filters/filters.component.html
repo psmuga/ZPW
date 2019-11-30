@@ -1,0 +1,58 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Filters</mat-panel-title>
+      <mat-panel-description>
+        <mat-chip-list>
+          <mat-chip *ngIf="settings.min">Price from<mat-chip color="primary" selected>{{settings.min}}</mat-chip></mat-chip>
+          <mat-chip *ngIf="settings.max">Price to<mat-chip color="primary" selected>{{settings.max}}</mat-chip></mat-chip>
+          <mat-chip *ngIf="settings.name">Trip Name <mat-chip color="primary" selected>{{settings.name}}</mat-chip></mat-chip>
+          <mat-chip *ngIf="settings.country">Country<mat-chip color="primary" selected>{{settings.country}}</mat-chip></mat-chip>
+        </mat-chip-list>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="conta">
+      <mat-card>
+        <mat-card-header>Price [PLN]</mat-card-header>
+        <mat-card-content>
+          <mat-form-field class="half">
+            <input matInput type="number" placeholder="min" [(ngModel)]="settings.min">
+          </mat-form-field>
+          <span></span>
+          <mat-form-field class="half">
+            <input matInput type="number" placeholder="max" [(ngModel)]="settings.max">
+          </mat-form-field>
+         
+        </mat-card-content>
+        <mat-card-actions>
+          <button  mat-button (click)="clearPrice()"><mat-icon >clear</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>Name</mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <input matInput type="search" placeholder="Trip name" [(ngModel)]="settings.name">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button  mat-button (click)="clearName()"><mat-icon >clear</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>Country</mat-card-header>
+        <mat-card-content>
+          <mat-form-field>
+            <input matInput type="search" placeholder="Country" [(ngModel)]="settings.country">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button  mat-button (click)="clearCountry()"><mat-icon >clear</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+       
+    </div>
+    <button class="my" mat-button (click)="search()"><mat-icon >search</mat-icon></button>
+    <button class="my" mat-button (click)="clearAll()"><mat-icon >clear</mat-icon></button>
+  </mat-expansion-panel>
+</mat-accordion>

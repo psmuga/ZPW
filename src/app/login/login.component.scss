@@ -1,0 +1,45 @@
+.vote {
+    font-size: 2em;
+}
+
+.containerr {
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    transform: translate(0%, 50%);
+    mat-card {
+        //flex-grow: 1;
+        width: 25vw;
+        margin: 1em;
+
+        mat-card-content {
+            mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+    .logo {
+        //flex-grow: 1;
+        align-self: flex-start;
+        .vote {
+            font-size: 2em;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .containerr {
+        width: 100%;
+        flex-direction: column;
+        transform: translate(0%, 0%);
+        mat-card {
+            margin-top: 5em;
+            width: 93vw;
+            margin-right: 10em;
+        }
+        .logo {
+            padding-top: 3em;
+            margin: auto;
+        }
+    }
+}

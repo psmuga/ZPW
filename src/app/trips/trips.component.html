@@ -1,15 +1,18 @@
 
+<div class="filter">
+  <app-filters (onSearch)="search($event)"></app-filters>
+</div>
 <div class="view">
-    <div class="myContainer">
-        <app-trip *ngFor="let item of trips" [trip]="item" (deleted)="onDeleted($event)"></app-trip>
-        
-      </div>
-      <app-bucketSummary></app-bucketSummary>
-      
-      <div class="add">
-          <button mat-fab color="warn" (click)="openDialog()">+</button>
-      </div>
-      
+  <div class="myContainer">
+    <app-trip *ngFor="let item of trips" [trip]="item" (deleted)="onDeleted($event)"></app-trip>
+
+  </div>
+  <app-bucketSummary></app-bucketSummary>
+
+  <div class="add">
+    <button mat-fab color="warn" (click)="openDialog()">+</button>
+  </div>
+
 </div>
 
 

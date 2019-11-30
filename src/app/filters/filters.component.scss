@@ -1,0 +1,28 @@
+
+mat-card {
+    width: 20em;
+    margin-right: 1em;
+    mat-card-content {
+        display: flex;
+        align-content: space-between;
+        .half {
+            width: 48%;
+        }
+        span {
+            width: 1em;
+        }
+
+    }
+}
+
+
+.conta {
+    display: flex;
+}
+
+mat-form-field {
+    width: 100%;
+}
+.my {
+    margin-top: 2em;
+}

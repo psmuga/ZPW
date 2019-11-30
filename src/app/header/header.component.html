@@ -3,6 +3,15 @@
         <a routerLink="/home" routerLinkActive="active">Trips Application</a>
         <span class="example-spacer"></span>
         <button mat-flat-button color="primary" routerLink="/basket" routerLinkActive="active"><mat-icon aria-hidden="false" aria-label="Example user verified icon">shopping_cart</mat-icon></button>
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="auth.logout()">
+      <mat-icon>person_outline</mat-icon>
+      <span>Log out</span>
+    </button>
+  </mat-menu>
