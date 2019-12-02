@@ -5,3 +5,7 @@ export interface User {
     displayName?: string;
     role?: string;
 }
+export enum Roles {
+    user = 'user',
+    admin = 'admin'
+}

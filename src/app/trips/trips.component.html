@@ -9,7 +9,7 @@
   </div>
   <app-bucketSummary></app-bucketSummary>
 
-  <div class="add">
+  <div class="add" *ngIf="isAdmin">
     <button mat-fab color="warn" (click)="openDialog()">+</button>
   </div>
 
