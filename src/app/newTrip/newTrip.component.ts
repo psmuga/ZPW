@@ -6,46 +6,41 @@ import { Validators } from '@angular/forms';
 import { Trip } from 'src/models/trip';
 
 @Component({
-  selector: 'app-newTrip',
-  templateUrl: './newTrip.component.html',
-  styleUrls: ['./newTrip.component.scss']
+    selector: 'app-newTrip',
+    templateUrl: './newTrip.component.html',
+    styleUrls: ['./newTrip.component.scss']
 })
 export class NewTripComponent implements OnInit {
-  tripForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    country: new FormControl('', Validators.required),
-    amount: new FormControl('', Validators.required),
-    capacity: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    start: new FormControl('', Validators.required),
-    end: new FormControl('', Validators.required),
-    photo: new FormControl('', Validators.required)
-  });
-  constructor(
-    private tripsService: TripsService,
-    public dialogRef: MatDialogRef<NewTripComponent>
-  ) {}
+    tripForm = new FormGroup({
+        name: new FormControl('', Validators.required),
+        country: new FormControl('', Validators.required),
+        amount: new FormControl('', Validators.required),
+        capacity: new FormControl('', Validators.required),
+        description: new FormControl('', Validators.required),
+        start: new FormControl('', Validators.required),
+        end: new FormControl('', Validators.required),
+        photo: new FormControl('', Validators.required)
+    });
+    constructor(private tripsService: TripsService, public dialogRef: MatDialogRef<NewTripComponent>) {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  add() {
-    const newTrip: Trip = {
-      name: this.tripForm.value.name,
-      capacity: this.tripForm.value.capacity,
-      capacityUsed: 0,
-      cost: this.tripForm.value.amount,
-      country: this.tripForm.value.country,
-      description: this.tripForm.value.description,
-      totalStar: 0,
-      startDate: this.tripForm.value.start,
-      endDate: this.tripForm.value.end,
-      photoLink: this.tripForm.value.photo
-    };
-    this.tripsService
-      .addProduct(newTrip)
-      .subscribe(_ => this.dialogRef.close());
-  }
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+    add() {
+        const newTrip: Trip = {
+            name: this.tripForm.value.name,
+            capacity: this.tripForm.value.capacity,
+            capacityUsed: 0,
+            cost: this.tripForm.value.amount,
+            country: this.tripForm.value.country,
+            description: this.tripForm.value.description,
+            totalStar: 0,
+            startDate: this.tripForm.value.start,
+            endDate: this.tripForm.value.end,
+            photoLink: this.tripForm.value.photo
+        };
+        this.tripsService.addProduct(newTrip).then(_ => this.dialogRef.close());
+    }
 }

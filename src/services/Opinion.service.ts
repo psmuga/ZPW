@@ -16,7 +16,7 @@ export class OpinionService {
   };
   constructor(private http: HttpClient) {}
 
-  getOpinions(id: number): Observable<Opinion[]> {
+  getOpinions(id: string): Observable<Opinion[]> {
     return this.http.get<Opinion[]>(`${this.opinionUrl}/?id=${id}`);
   }
 
@@ -33,7 +33,7 @@ export class OpinionService {
     return this.http.delete<Opinion>(url, this.httpOptions);
   }
 
-  getStars(id: number): Observable<Star[]> {
+  getStars(id: string): Observable<Star[]> {
     return this.http.get<Star[]>(`${this.starsUrl}/?id=${id}`);
   }
 

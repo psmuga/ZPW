@@ -7,11 +7,11 @@ export interface Opinion {
   author: string;
   comment: string;
   time: Date;
-  id: number;
+  id: string;
 }
 
 export interface Star {
     star: number;
     author: string;
-    id: number;
+    id: string;
 }

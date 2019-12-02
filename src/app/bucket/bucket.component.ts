@@ -45,7 +45,7 @@ export class BucketComponent implements OnInit {
   resign(product: Trip) {
     this.basketService.deleteProduct(product.id);
     product.capacityUsed = 0;
-    this.tripsService.updateTrip(product).subscribe();
+    this.tripsService.updateTrip(product);
     this.products = this.products.filter(item => item !== product);
   }
   removeOne(product: Trip) {
@@ -53,12 +53,13 @@ export class BucketComponent implements OnInit {
     if (product.capacityUsed === 0) {
       this.resign(product);
     } else {
-      this.tripsService.updateTrip(product).subscribe();
+      this.tripsService.updateTrip(product);
     }
   }
   addOne(product: Trip) {
     product.capacityUsed++;
-    this.tripsService.updateTrip(product).subscribe(_ => this.snackBar.open('Added 1 more product!', 'OK', { duration: 2000 }));
+    this.tripsService.updateTrip(product);
+    this.snackBar.open('Added 1 more product!', 'OK', { duration: 2000 });
   }
 
   getTotalcost() {

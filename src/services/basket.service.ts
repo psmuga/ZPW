@@ -13,7 +13,7 @@ export class BasketService {
   getProducts(): Trip[] {
     return this.saleTrips;
   }
-  getProduct(item: number): Trip {
+  getProduct(item: string): Trip {
     return this.saleTrips.find(({ id }) => id === item);
   }
   addProduct(trip: Trip) {
@@ -21,7 +21,7 @@ export class BasketService {
       this.saleTrips.push(trip);
     }
   }
-  deleteProduct(item: number) {
+  deleteProduct(item: string) {
     this.saleTrips = this.saleTrips.filter(element => {
       if (element.id != item) {
         return element;

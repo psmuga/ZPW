@@ -45,8 +45,7 @@ export class AuthService {
             .get()
             .toPromise()
             .then(x => {
-                console.log('here' + x.get('role'));
-                return x.get('role') == Roles.admin ? true : false;
+                return x.get('role') === Roles.admin ? true : false;
             });
     }
     login({ email, password }: Credentials) {

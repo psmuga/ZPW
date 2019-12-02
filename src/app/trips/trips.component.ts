@@ -52,7 +52,9 @@ export class TripsComponent implements OnInit, OnChanges {
         //   .reduce((prev, cur) => prev + cur);
     }
     onDeleted($event) {
-        this.tripsService.deleteProduct($event).subscribe(_ => (this.trips = this.trips.filter(value => value.id !== $event)));
+        const trip = this.trips.find(value => value.id ===$event);
+        this.tripsService.deleteProduct(trip);
+        this.trips = this.trips.filter(value => value.id !== $event);
     }
 
     openDialog(): void {
