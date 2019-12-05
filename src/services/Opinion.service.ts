@@ -1,47 +1,76 @@
 import { Injectable } from '@angular/core';
 import { Opinion, Star } from 'src/models/opinion';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class OpinionService {
-  stars: Star[];
-  opinions: Opinion[];
-  private opinionUrl = 'api/opinions';
-  private starsUrl = 'api/stars';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-  constructor(private http: HttpClient) {}
+    data$: Observable<Opinion[]>;
+    dataCollection: AngularFirestoreCollection<Opinion>;
+    dataDoc: AngularFirestoreDocument<Opinion>;
+    dataStar$: Observable<Star[]>;
+    dataStarCollection: AngularFirestoreCollection<Star>;
+    dataStarDoc: AngularFirestoreDocument<Star>;
+    constructor(private afs: AngularFirestore) {
+        this.dataCollection = this.afs.collection('opinions');
+        this.dataStarCollection = this.afs.collection('stars');
+    }
 
-  getOpinions(id: string): Observable<Opinion[]> {
-    return this.http.get<Opinion[]>(`${this.opinionUrl}/?id=${id}`);
-  }
+    getOpinions(id: string): Observable<Opinion[]> {
+        this.dataCollection = this.afs.collection('opinions', x => {
+            return x.where('tripID', '==', id);
+        });
 
-  addOpinion(element: Opinion): Observable<Opinion> {
-    return this.http.post<Opinion>(this.opinionUrl, element, this.httpOptions);
-  }
-  updateOpinion(item: Opinion): Observable<any> {
-    return this.http.put(this.opinionUrl, item, this.httpOptions);
-  }
-  deleteOpinion(opinion: Opinion | number): Observable<Opinion> {
-    const id = typeof opinion === 'number' ? opinion : opinion.id;
-    const url = `${this.opinionUrl}/${id}`;
+        this.data$ = this.dataCollection.snapshotChanges().pipe(
+            map(changes => {
+                return changes.map(a => {
+                    const data = a.payload.doc.data() as Opinion;
+                    data.id = a.payload.doc.id;
+                    return data;
+                });
+            })
+        );
+        return this.data$;
+    }
 
-    return this.http.delete<Opinion>(url, this.httpOptions);
-  }
+    addOpinion(element: Opinion){
+        this.dataCollection.add(element);
+    }
+    updateOpinion(item: Opinion) {
+        this.dataDoc = this.afs.doc(`opinions/${item.id}`);
+        this.dataDoc.update(item);
+    }
+    deleteOpinion(opinion: Opinion | number) {
+        const id = typeof opinion === 'number' ? opinion : opinion.id;
+        this.dataDoc = this.afs.doc(`opinions/${id}`);
+        this.dataDoc.delete();
+    }
 
-  getStars(id: string): Observable<Star[]> {
-    return this.http.get<Star[]>(`${this.starsUrl}/?id=${id}`);
-  }
+    getStars(id: string): Observable<Star[]> {
+        this.dataStarCollection = this.afs.collection('stars', x => {
+            return x.where('tripID', '==', id);
+        });
 
-  addStar(element: Star): Observable<Star> {
-    return this.http.post<Star>(this.starsUrl, element, this.httpOptions);
-  }
-  updateStars(item: Star): Observable<any> {
-    return this.http.put(this.starsUrl, item, this.httpOptions);
-  }
+        this.dataStar$ = this.dataStarCollection.snapshotChanges().pipe(
+            map(changes => {
+                return changes.map(a => {
+                    const data = a.payload.doc.data() as Star;
+                    data.id = a.payload.doc.id;
+                    return data;
+                });
+            })
+        );
+        return this.dataStar$;
+    }
 
+    addStar(element: Star) {
+        this.dataStarCollection.add(element);
+    }
+    updateStars(item: Star) {
+        this.dataStarDoc = this.afs.doc(`stars/${item.id}`);
+        this.dataStarDoc.update(item);
+    }
 }

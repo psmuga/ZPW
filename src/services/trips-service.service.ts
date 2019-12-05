@@ -12,7 +12,7 @@ export class TripsService {
     dataCollection: AngularFirestoreCollection<Trip>;
     dataDoc: AngularFirestoreDocument<Trip>;
     constructor(private afs: AngularFirestore) {
-        this.dataCollection = this.afs.collection('trips');
+        this.dataCollection = this.afs.collection('trips', x => x.orderBy('country', 'asc'));
         this.getProducts();
     }
 
@@ -23,7 +23,7 @@ export class TripsService {
             .pipe(
                 map(changes => {
                     return changes.map(a => {
-                        const data = a.payload.doc.data() as Trip;
+                        let data = a.payload.doc.data() as Trip;
                         data.id = a.payload.doc.id;
                         return data;
                     });
@@ -46,8 +46,10 @@ export class TripsService {
         this.dataDoc = this.afs.doc(`trips/${item}`);
         return this.dataDoc.valueChanges();
     }
-    addProduct(trip: Trip) {
-        return this.dataCollection.add(trip);
+    async addProduct(trip: Trip) {
+        const result = await this.dataCollection.add(trip);
+        trip.id = result.id;
+        return this.updateTrips(trip);
     }
     deleteProduct(trip: Trip) {
         this.dataDoc = this.afs.doc(`trips/${trip.id}`);
@@ -56,5 +58,25 @@ export class TripsService {
     updateTrip(item: Trip) {
         this.dataDoc = this.afs.doc(`trips/${item.id}`);
         this.dataDoc.update(item);
+    }
+
+    private updateTrips(trip: Trip) {
+        // Sets user data to firestore on login
+        const userRef: AngularFirestoreDocument<Trip> = this.afs.doc(`trips/${trip.id}`);
+
+        const data = {
+            name: trip.name,
+            country: trip.country,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
+            cost: trip.cost,
+            capacity: trip.capacity,
+            description: trip.description,
+            photoLink: trip.photoLink,
+            capacityUsed: trip.capacityUsed,
+            totalStar: trip.totalStar,
+            id: trip.id
+        };
+        return userRef.set(data, { merge: true });
     }
 }

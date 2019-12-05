@@ -10,9 +10,7 @@ import { BucketSummaryComponent } from './bucketSummary/bucketSummary.component'
 import { DetailTripComponent } from './detailTrip/detailTrip.component';
 import { FiltersComponent } from './filters/filters.component';
 import { HeaderComponent } from './header/header.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpClientModule } from '@angular/common/http';
-import { InMemoryDataService } from 'src/services/InMemoryData.service';
 import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -76,9 +74,6 @@ import { MatMenuModule } from '@angular/material/menu';
         NgbModule,
         MatListModule,
         HttpClientModule,
-        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-            dataEncapsulation: false
-        }),
         MatExpansionModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireAuthModule,

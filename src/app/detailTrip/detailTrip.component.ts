@@ -29,18 +29,19 @@ export class DetailTripComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.tripsService.getProduct(params['id']).subscribe(data => {
-                console.log(data);
                 this.trip = data;
                 this.getStars();
                 this.sellPlaces = this.trip.capacity - this.trip.capacityUsed;
             });
         });
     }
-    ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
+    ngOnChanges() {
         this.getStars();
     }
     getStars() {
-        this.opinionService.getStars(this.trip.id).subscribe(data => (this.stars = data));
+        if (this.trip) {
+            this.opinionService.getStars(this.trip.id).subscribe(data => (this.stars = data));
+        }
     }
 
     onVoted($event) {
