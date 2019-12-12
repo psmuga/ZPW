@@ -1,0 +1,18 @@
+.add {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+}
+
+.view {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .conta {
+        width: 70vw;
+        mat-form-field {
+            width: 100%;
+        }
+    }
+}

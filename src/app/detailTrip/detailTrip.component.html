@@ -29,7 +29,7 @@
 
       <button mat-button (click)="add()" [hidden]="trip.capacityUsed == trip.capacity">+</button>
       <button mat-button (click)="resign()" [hidden]="trip.capacityUsed == 0">-</button>
-      <button mat-button>
+      <button mat-button *ngIf="isAdmin">
         <mat-icon (click)="removeTrip()" aria-hidden="false" aria-label="Example user verified icon" routerLink="/home"
           routerLinkActive="active">delete</mat-icon>
       </button>

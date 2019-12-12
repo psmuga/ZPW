@@ -3,9 +3,9 @@ import { Trip } from './../../models/trip';
 import { TripsService } from 'src/services/trips-service.service';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OpinionService } from 'src/services/Opinion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BasketService } from 'src/services/basket.service';
+import { AuthService } from 'src/services/Auth.service';
 
 @Component({
     selector: 'app-detailTrip',
@@ -18,12 +18,13 @@ export class DetailTripComponent implements OnInit, OnChanges {
     stars: Star[];
     totalStar = 0;
     sellPlaces = -1;
+    isAdmin = false;
     constructor(
         private tripsService: TripsService,
-        private opinionService: OpinionService,
         private route: ActivatedRoute,
         private bucketService: BasketService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private auth: AuthService
     ) {}
 
     ngOnInit() {
@@ -34,14 +35,16 @@ export class DetailTripComponent implements OnInit, OnChanges {
                 this.sellPlaces = this.trip.capacity - this.trip.capacityUsed;
             });
         });
+
+        this.auth.isAdmin().then(x => {
+            this.isAdmin = x;
+        });
     }
     ngOnChanges() {
         this.getStars();
     }
     getStars() {
-        if (this.trip) {
-            this.opinionService.getStars(this.trip.id).subscribe(data => (this.stars = data));
-        }
+        this.stars = [];
     }
 
     onVoted($event) {
@@ -57,13 +60,9 @@ export class DetailTripComponent implements OnInit, OnChanges {
 
     resign(): void {
         this.trip.capacityUsed -= 1;
-        if (this.trip.capacityUsed == 0) {
-            this.bucketService.deleteProduct(this.trip.id);
-            this.tripsService.deleteProduct(this.trip);
-        } else {
-            this.bucketService.updateTrip(this.trip);
-            this.tripsService.updateTrip(this.trip);
-        }
+
+        this.bucketService.updateTrip(this.trip);
+        this.tripsService.updateTrip(this.trip);
     }
     removeTrip() {
         this.tripsService.deleteProduct(this.trip);

@@ -1,13 +1,16 @@
 <mat-card class="card" [class.bColor]="trip.capacity - trip.capacityUsed <= 3" [class.low]="trip.cost == min"
   [class.high]="trip.cost == max">
   <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>{{trip.name | uppercase}}</mat-card-title>
-      <mat-card-subtitle>{{trip.cost | currency: 'PLN '}}</mat-card-subtitle>
+
+    <mat-card-title-group class="marg">
+        <mat-card-title>{{trip.country | uppercase}}</mat-card-title>
+        <mat-card-subtitle>{{trip.name | uppercase}}</mat-card-subtitle>
+
     </mat-card-title-group>
     <mat-card-title-group>
-      <mat-card-title>{{trip.country | uppercase}}</mat-card-title>
-    </mat-card-title-group>
+        <mat-card-subtitle>{{trip.cost | currency: 'PLN '}}</mat-card-subtitle>
+        
+      </mat-card-title-group>
   </mat-card-header>
   <img mat-card-image src="{{trip.photoLink}}" routerLink="/detail/{{trip.id}}">
   <mat-card-content>
@@ -22,7 +25,7 @@
   <mat-card-actions>
     <button mat-button (click)="add()" [hidden]="trip.capacityUsed == trip.capacity">+</button>
     <button mat-button (click)="resign()" [hidden]="trip.capacityUsed == 0">-</button>
-    <button mat-button>
+    <button mat-button *ngIf="isAdmin">
       <mat-icon (click)="removeTrip()" aria-hidden="false" aria-label="Example user verified icon">delete</mat-icon>
     </button>
     <button mat-button routerLink="/detail/{{trip.id}}" routerLinkActive="active">details</button>

@@ -1,23 +1,26 @@
 <ng-template #template let-fill="fill">
-  <mat-icon class="star" [class.full]="fill === 100" aria-hidden="false" aria-label="Example user verified icon" >star
+  <mat-icon class="star" [class.full]="fill === 100" aria-hidden="false" aria-label="Example user verified icon">star
   </mat-icon>
 </ng-template>
-    <mat-card class="comment" *ngFor="let item of opinions">
-        <mat-card-header>
-            <mat-card-title>
-              <h3>{{item.author}}</h3>
-            </mat-card-title>
-            <mat-card-subtitle>{{item.time.seconds*1000 |date}}
-            </mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            {{item.comment}}
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color="primary" (click)="delete(item)">delete
-            </button>
-          </mat-card-actions>
-    </mat-card>
+<div *ngIf="opinions">
+  <mat-card class="comment" *ngFor="let item of opinions">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>{{item.author}}</h3>
+      </mat-card-title>
+      <mat-card-subtitle>{{item.time.seconds*1000 |date}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      {{item.comment}}
+    </mat-card-content>
+    <mat-card-actions *ngIf="isAdmin">
+      <button mat-button color="primary" (click)="delete(item)">delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
 
 
 <div class="opinion">
@@ -46,9 +49,10 @@
 
     </mat-card-header>
     <mat-card-content>
-      <ngb-rating [max]="settings.max" [(rate)]="star" [starTemplate]="template"  (rateChange)="addStar()" ></ngb-rating>
+      <ngb-rating [readonly]="order == undefined" [max]="settings.max" [(rate)]="star"
+        [starTemplate]="template" (rateChange)="addStar()"></ngb-rating>
     </mat-card-content>
 
   </mat-card>
 
-</div> 
+</div>

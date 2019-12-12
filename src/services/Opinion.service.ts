@@ -11,12 +11,9 @@ export class OpinionService {
     data$: Observable<Opinion[]>;
     dataCollection: AngularFirestoreCollection<Opinion>;
     dataDoc: AngularFirestoreDocument<Opinion>;
-    dataStar$: Observable<Star[]>;
-    dataStarCollection: AngularFirestoreCollection<Star>;
-    dataStarDoc: AngularFirestoreDocument<Star>;
+
     constructor(private afs: AngularFirestore) {
         this.dataCollection = this.afs.collection('opinions');
-        this.dataStarCollection = this.afs.collection('stars');
     }
 
     getOpinions(id: string): Observable<Opinion[]> {
@@ -47,30 +44,5 @@ export class OpinionService {
         const id = typeof opinion === 'number' ? opinion : opinion.id;
         this.dataDoc = this.afs.doc(`opinions/${id}`);
         this.dataDoc.delete();
-    }
-
-    getStars(id: string): Observable<Star[]> {
-        this.dataStarCollection = this.afs.collection('stars', x => {
-            return x.where('tripID', '==', id);
-        });
-
-        this.dataStar$ = this.dataStarCollection.snapshotChanges().pipe(
-            map(changes => {
-                return changes.map(a => {
-                    const data = a.payload.doc.data() as Star;
-                    data.id = a.payload.doc.id;
-                    return data;
-                });
-            })
-        );
-        return this.dataStar$;
-    }
-
-    addStar(element: Star) {
-        this.dataStarCollection.add(element);
-    }
-    updateStars(item: Star) {
-        this.dataStarDoc = this.afs.doc(`stars/${item.id}`);
-        this.dataStarDoc.update(item);
     }
 }

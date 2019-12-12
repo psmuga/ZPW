@@ -3,6 +3,7 @@ import { BasketService } from './../../services/basket.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from 'src/models/trip';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/services/Auth.service';
 
 @Component({
     selector: 'app-trip',
@@ -15,9 +16,19 @@ export class TripComponent implements OnInit {
     @Input() min: number;
     @Output() deleted = new EventEmitter<string>();
     counter: 0;
-    constructor(private bucketService: BasketService, private snackBar: MatSnackBar, private tripService: TripsService) {}
+    isAdmin = false;
+    constructor(
+        private bucketService: BasketService,
+        private snackBar: MatSnackBar,
+        private tripService: TripsService,
+        private auth: AuthService
+    ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.auth.isAdmin().then(x => {
+            this.isAdmin = x;
+        });
+    }
 
     add(): void {
         this.trip.capacityUsed += 1;
@@ -27,9 +38,6 @@ export class TripComponent implements OnInit {
     }
     resign(): void {
         this.trip.capacityUsed -= 1;
-        if (this.trip.capacityUsed == 0) {
-            this.bucketService.deleteProduct(this.trip.id);
-        }
         this.bucketService.updateTrip(this.trip);
         this.tripService.updateTrip(this.trip);
     }

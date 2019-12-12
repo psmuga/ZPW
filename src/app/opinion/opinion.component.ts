@@ -1,7 +1,8 @@
+import { OrdersService, Order } from './../../services/orders.service';
 import { AuthService } from 'src/services/Auth.service';
 import { Star } from './../../models/opinion';
 import { Trip } from './../../models/trip';
-import { Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 import { OpinionConfig, Opinion } from 'src/models/opinion';
 import { OpinionService } from 'src/services/Opinion.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
@@ -19,16 +20,20 @@ export class OpinionComponent implements OnInit, OnChanges {
         coment: new FormControl('', Validators.required)
     });
     star = 0;
-    stars: Star[] = [];
     index = 0;
     opinions: Opinion[] = [];
-    constructor(private opinionService: OpinionService, private auth: AuthService) {}
+    isAdmin = false;
+    order: Order;
+    constructor(private opinionService: OpinionService, private auth: AuthService, private orderService: OrdersService) {}
 
     ngOnInit() {
         this.settings = {
             max: 5,
             value: -1
         };
+        this.auth.isAdmin().then(x => {
+            this.isAdmin = x;
+        });
     }
     ngOnChanges() {
         this.getOpinions();
@@ -44,33 +49,28 @@ export class OpinionComponent implements OnInit, OnChanges {
     }
     getStars() {
         if (this.trip) {
-            this.opinionService.getStars(this.trip.id).subscribe(data => {
-                this.stars = data;
-                if (this.stars[0]) {
-                    this.star = this.stars[0].star;
+            this.orderService.getOrders(this.auth.user.uid, this.trip.id).subscribe(data => {
+                this.order = data[0];
+                if (data[0] && data[0].star) {
+                    this.star = this.order.star;
                 }
-                this.totalS.emit(this.getTotalStars());
             });
         }
     }
 
     addStar() {
-        if(!this.trip){
+        if (!this.trip) {
             return;
         }
-        const st: Star = {
-            author: this.auth.user.uid,
-            tripID: this.trip.id,
-            star: this.star
-        };
-        this.opinionService.addStar(st);
-        this.stars.push(st);
-        this.totalS.emit(this.getTotalStars());
+        this.order.star = this.star;
+        this.orderService.updateOrder(this.order);
+        this.totalS.emit(0);
     }
 
     getTotalStars() {
-        const result = this.stars.reduce((a, b) => a + b.star, 0) / this.stars.length;
-        return Number.isNaN(result) ? 0 : result;
+        //const result = this.stars.reduce((a, b) => a + b.star, 0) / this.stars.length;
+        //return Number.isNaN(result) ? 0 : result;
+        return 0;
     }
 
     onCreateComment() {

@@ -36,51 +36,57 @@ import { TripsComponent } from './trips/trips.component';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MatMenuModule } from '@angular/material/menu';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        BucketComponent,
-        BucketSummaryComponent,
-        DetailTripComponent,
-        FiltersComponent,
-        HeaderComponent,
-        LoginComponent,
-        NewTripComponent,
-        OpinionComponent,
-        TripComponent,
-        TripsComponent,
-        RegisterComponent
-    ],
-    entryComponents: [NewTripComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSliderModule,
-        MatChipsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MatSnackBarModule,
-        MatTableModule,
-        MatGridListModule,
-        NgbModule,
-        MatListModule,
-        HttpClientModule,
-        MatExpansionModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        MatMenuModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      BucketComponent,
+      BucketSummaryComponent,
+      DetailTripComponent,
+      FiltersComponent,
+      HeaderComponent,
+      LoginComponent,
+      NewTripComponent,
+      OpinionComponent,
+      TripComponent,
+      TripsComponent,
+      RegisterComponent,
+      AdminComponent
+   ],
+   entryComponents: [
+      NewTripComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      MatCardModule,
+      MatButtonModule,
+      MatToolbarModule,
+      MatIconModule,
+      MatSliderModule,
+      MatChipsModule,
+      MatDialogModule,
+      MatFormFieldModule,
+      MatInputModule,
+      ReactiveFormsModule,
+      FormsModule,
+      MatSnackBarModule,
+      MatTableModule,
+      MatGridListModule,
+      NgbModule,
+      MatListModule,
+      HttpClientModule,
+      MatExpansionModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule,
+      AngularFirestoreModule,
+      MatMenuModule
+   ],
+   providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule {}

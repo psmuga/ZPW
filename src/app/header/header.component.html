@@ -2,6 +2,7 @@
     <mat-toolbar-row>
         <a routerLink="/home" routerLinkActive="active">Trips Application</a>
         <span class="example-spacer"></span>
+        <button mat-flat-button color="primary" routerLink="/admin" routerLinkActive="active" *ngIf="isAdmin"><mat-icon aria-hidden="false" aria-label="Example user verified icon">dashboard</mat-icon></button>
         <button mat-flat-button color="primary" routerLink="/basket" routerLinkActive="active"><mat-icon aria-hidden="false" aria-label="Example user verified icon">shopping_cart</mat-icon></button>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
