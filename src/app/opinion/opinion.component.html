@@ -49,7 +49,7 @@
 
     </mat-card-header>
     <mat-card-content>
-      <ngb-rating [readonly]="order == undefined" [max]="settings.max" [(rate)]="star"
+      <ngb-rating [readonly]="order == undefined || order.star != undefined" [max]="settings.max" [(rate)]="star"
         [starTemplate]="template" (rateChange)="addStar()"></ngb-rating>
     </mat-card-content>
 
