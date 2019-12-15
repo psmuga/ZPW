@@ -12,7 +12,8 @@
   <mat-card-content>
     <mat-card class="desc">
       <p>{{trip.description}}</p>
-
+      <h6>Start: {{trip.startDate | date}}</h6>
+      <h6>End: {{trip.endDate | date}}</h6>
     </mat-card>
     <img mat-card-image src="{{trip.photoLink}}">
 

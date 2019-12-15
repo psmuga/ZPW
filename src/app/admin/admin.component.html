@@ -13,25 +13,30 @@
         </mat-expansion-panel-header>
         <div class="view">
           <div class="conta">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="cost" [(ngModel)]="item.cost">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="name" [(ngModel)]="item.name">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="country" [(ngModel)]="item.country">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="free spots" [(ngModel)]="item.capacity">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="photo" [(ngModel)]="item.photoLink">
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="description" [(ngModel)]="item.description"></textarea>
-
-              </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="cost" [(ngModel)]="item.cost">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="name" [(ngModel)]="item.name">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="country" [(ngModel)]="item.country">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="number" placeholder="free spots" [(ngModel)]="item.capacity">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="photo" [(ngModel)]="item.photoLink">
+            </mat-form-field>
+            <mat-form-field>
+              <textarea matInput placeholder="description" [(ngModel)]="item.description"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Start date" type="date" [(ngModel)]="item.startDate">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="End date" type="date" [(ngModel)]="item.endDate">
+            </mat-form-field>
             <div>
 
 

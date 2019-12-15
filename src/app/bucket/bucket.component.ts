@@ -3,7 +3,7 @@ import { OrdersService, Order } from './../../services/orders.service';
 import { TripsService } from './../../services/trips-service.service';
 import { Trip } from 'src/models/trip';
 import { BasketService } from './../../services/basket.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         ])
     ]
 })
-export class BucketComponent implements OnInit {
+export class BucketComponent implements OnInit, OnChanges {
     products: Trip[];
     displayedColumns: string[] = ['name', 'price', 'country', 'amount'];
     expandedElement: Trip | null;
@@ -34,6 +34,10 @@ export class BucketComponent implements OnInit {
     ngOnInit() {
         this.products = this.getProcucts();
     }
+    ngOnChanges() {
+        this.products = this.getProcucts();
+    }
+
     getProcucts(): Trip[] {
         return this.basketService.getProducts();
     }
@@ -66,6 +70,9 @@ export class BucketComponent implements OnInit {
 
     buy() {
         this.products.forEach(product => {
+            product.capacity = product.capacity - product.capacityUsed;
+            product.capacityUsed = 0;
+            this.tripsService.updateTrip(product);
             const order: Order = {
                 tripID: product.id,
                 userID: this.auth.user.uid

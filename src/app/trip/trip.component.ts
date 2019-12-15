@@ -38,6 +38,9 @@ export class TripComponent implements OnInit {
     }
     resign(): void {
         this.trip.capacityUsed -= 1;
+        if(this.trip.capacityUsed === 0) {
+            this.bucketService.deleteProduct(this.trip.id);
+        }
         this.bucketService.updateTrip(this.trip);
         this.tripService.updateTrip(this.trip);
     }

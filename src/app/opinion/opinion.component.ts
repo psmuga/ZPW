@@ -69,7 +69,7 @@ export class OpinionComponent implements OnInit, OnChanges {
     }
 
     getTotalStars() {
-        this.orderService.getAllOrders(this.trip.id).subscribe(data => {
+        this.orderService.getOrdersForTrip(this.trip.id).subscribe(data => {
             let result = 0;
             let amount = 0;
             for (const index in data) {
@@ -79,7 +79,6 @@ export class OpinionComponent implements OnInit, OnChanges {
                 }
             }
             result = result / amount;
-            console.log(result);
             this.totalS.emit(Number.isNaN(result) ? 0 : result);
         });
     }
