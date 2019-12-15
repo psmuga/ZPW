@@ -37,7 +37,7 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button color="primary" (click)="onCreateComment()" [disabled]="!opinionForm.valid">comment
+      <button mat-button color="primary" (click)="onCreateComment()" [disabled]="!canComment()">comment
       </button>
     </mat-card-actions>
   </mat-card>

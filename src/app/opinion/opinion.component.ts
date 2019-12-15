@@ -88,4 +88,11 @@ export class OpinionComponent implements OnInit, OnChanges {
     delete(item) {
         this.opinionService.deleteOpinion(item);
     }
+
+    canComment(): boolean {
+        if(this.order === undefined || this.order.comment !== undefined) {
+            return false;
+        }
+        return this.opinionForm.valid;
+    }
 }
