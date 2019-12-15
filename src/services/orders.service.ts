@@ -32,10 +32,8 @@ export class OrdersService {
         return this.data$;
     }
 
-    getAllOrders(tripid: string): Observable<Order[]> {
-        this.dataCollection = this.afs.collection('orders', x => {
-            return x.where('tripID', '==', tripid);
-        });
+    getAllOrders(): Observable<Order[]> {
+        this.dataCollection = this.afs.collection('orders');
 
         this.data$ = this.dataCollection.snapshotChanges().pipe(
             map(changes => {

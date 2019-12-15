@@ -1,3 +1,4 @@
+import { OrdersService } from './../../services/orders.service';
 import { AuthService } from 'src/services/Auth.service';
 import { TripsService } from './../../services/trips-service.service';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
@@ -15,7 +16,12 @@ export class TripsComponent implements OnInit, OnChanges {
     totalSale = 0;
     filter: FilterSettings;
     isAdmin = false;
-    constructor(private tripsService: TripsService, private auth: AuthService, public dialog: MatDialog) {}
+    constructor(
+        private tripsService: TripsService,
+        private auth: AuthService,
+        public dialog: MatDialog,
+        private orderService: OrdersService
+    ) {}
 
     ngOnInit() {
         this.getProducts();
@@ -47,12 +53,12 @@ export class TripsComponent implements OnInit, OnChanges {
         );
     }
     getTotalSale() {
-        // this.totalSale = this.trips
-        //   .map(item => item.capacityUsed)
-        //   .reduce((prev, cur) => prev + cur);
+        this.orderService.getAllOrders().subscribe(data => {
+            this.totalSale = data.length;
+        })
     }
     onDeleted($event) {
-        const trip = this.trips.find(value => value.id ===$event);
+        const trip = this.trips.find(value => value.id === $event);
         this.tripsService.deleteProduct(trip);
         this.trips = this.trips.filter(value => value.id !== $event);
     }
