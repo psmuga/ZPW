@@ -38,6 +38,7 @@ export class OpinionComponent implements OnInit, OnChanges {
     ngOnChanges() {
         this.getOpinions();
         this.getStars();
+        this.getTotalStars();
     }
 
     getOpinions() {
@@ -68,9 +69,19 @@ export class OpinionComponent implements OnInit, OnChanges {
     }
 
     getTotalStars() {
-        //const result = this.stars.reduce((a, b) => a + b.star, 0) / this.stars.length;
-        //return Number.isNaN(result) ? 0 : result;
-        return 0;
+        this.orderService.getAllOrders(this.trip.id).subscribe(data => {
+            let result = 0;
+            let amount = 0;
+            for (const index in data) {
+                if (data[index].star) {
+                    result += data[index].star;
+                    amount += 1;
+                }
+            }
+            result = result / amount;
+            console.log(result);
+            this.totalS.emit(Number.isNaN(result) ? 0 : result);
+        });
     }
 
     onCreateComment() {
@@ -90,7 +101,7 @@ export class OpinionComponent implements OnInit, OnChanges {
     }
 
     canComment(): boolean {
-        if(this.order === undefined || this.order.comment !== undefined) {
+        if (this.order === undefined || this.order.comment !== undefined) {
             return false;
         }
         return this.opinionForm.valid;
