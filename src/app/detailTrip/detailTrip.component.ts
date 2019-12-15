@@ -60,7 +60,9 @@ export class DetailTripComponent implements OnInit, OnChanges {
 
     resign(): void {
         this.trip.capacityUsed -= 1;
-
+        if(this.trip.capacityUsed === 0) {
+            this.bucketService.deleteProduct(this.trip.id);
+        }
         this.bucketService.updateTrip(this.trip);
         this.tripsService.updateTrip(this.trip);
     }

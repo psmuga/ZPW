@@ -15,7 +15,6 @@ export class TripComponent implements OnInit {
     @Input() max: number;
     @Input() min: number;
     @Output() deleted = new EventEmitter<string>();
-    counter: 0;
     isAdmin = false;
     constructor(
         private bucketService: BasketService,
@@ -32,7 +31,7 @@ export class TripComponent implements OnInit {
 
     add(): void {
         this.trip.capacityUsed += 1;
-        this.tripService.updateTrip(this.trip);
+        //this.tripService.updateTrip(this.trip);
         this.snackBar.open('Added 1 item to bucket!', 'OK', { duration: 2000 });
         this.bucketService.addProduct(this.trip);
     }
@@ -42,13 +41,12 @@ export class TripComponent implements OnInit {
             this.bucketService.deleteProduct(this.trip.id);
         }
         this.bucketService.updateTrip(this.trip);
-        this.tripService.updateTrip(this.trip);
+        //this.tripService.updateTrip(this.trip);
     }
     removeTrip() {
         this.deleted.emit(this.trip.id);
     }
     onVoted($event) {
-        this.counter++;
         this.trip.totalStar += $event;
     }
 }
