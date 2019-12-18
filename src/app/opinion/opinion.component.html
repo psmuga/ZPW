@@ -5,11 +5,13 @@
 <div *ngIf="opinions">
   <mat-card class="comment" *ngFor="let item of opinions">
     <mat-card-header>
-      <mat-card-title>
-        <h3>{{item.author}}</h3>
-      </mat-card-title>
-      <mat-card-subtitle>{{item.time.seconds*1000 |date}}
-        </mat-card-subtitle>
+      <!-- <mat-card-title> -->
+        <h4>{{item.author}}</h4>
+      <!-- </mat-card-title> -->
+      <div class="spacer"></div>
+      <!-- <mat-card-subtitle> -->
+        {{item.time.seconds*1000 |date}}
+        <!-- </mat-card-subtitle> -->
     </mat-card-header>
     <mat-card-content>
       {{item.comment}}
@@ -27,7 +29,7 @@
   <mat-card class="com">
     <mat-card-header>
       <mat-card-title>
-        <h3>Your opinion</h3>
+        <h5>Your opinion</h5>
       </mat-card-title>
 
     </mat-card-header>
@@ -44,7 +46,7 @@
   <mat-card class="rating">
     <mat-card-header>
       <mat-card-title>
-        <h3>Your rating</h3>
+        <h5>Your rating</h5>
       </mat-card-title>
 
     </mat-card-header>

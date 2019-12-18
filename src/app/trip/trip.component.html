@@ -14,7 +14,7 @@
   </mat-card-header>
   <img mat-card-image src="{{trip.photoLink}}" routerLink="/detail/{{trip.id}}">
   <mat-card-content>
-    <p>{{trip.description | slice:0:80}}</p>
+    <p>{{trip.description | slice:0:70}} ...</p>
     <mat-chip-list>
         <mat-chip color="primary" selected *ngIf="trip.capacity - trip.capacityUsed > 0">
             {{trip.capacity - trip.capacityUsed}} free spot</mat-chip>

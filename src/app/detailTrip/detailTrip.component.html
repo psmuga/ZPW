@@ -1,46 +1,48 @@
-<mat-card class="card" *ngIf="trip">
-  <div class="myHeader">
-    <h1>{{trip.name | uppercase}} </h1>
-
-    <h3>{{trip.country | uppercase}} </h3>
-    <h5>{{trip.cost | currency: 'PLN '}}</h5>
-
-  </div>
-  <button mat-flat-button color="primary" routerLink="/home" routerLinkActive="active">
-    <mat-icon aria-hidden="false" aria-label="Example user verified icon">arrow_back</mat-icon>Go back
-  </button>
-  <mat-card-content>
-    <mat-card class="desc">
-      <p>{{trip.description}}</p>
-      <h6>Start: {{trip.startDate | date}}</h6>
-      <h6>End: {{trip.endDate | date}}</h6>
-    </mat-card>
-    <img mat-card-image src="{{trip.photoLink}}">
-
-
-
-    <app-opinion [trip]="trip" (totalS)="onVoted($event)"></app-opinion>
-
-
-  </mat-card-content>
-  <mat-card-actions>
-
-
-    <mat-chip-list aria-label="Fish selection">
-
-      <button mat-button (click)="add()" [hidden]="trip.capacityUsed == trip.capacity">+</button>
-      <button mat-button (click)="resign()" [hidden]="trip.capacityUsed == 0">-</button>
-      <button mat-button *ngIf="isAdmin">
-        <mat-icon (click)="removeTrip()" aria-hidden="false" aria-label="Example user verified icon" routerLink="/home"
-          routerLinkActive="active">delete</mat-icon>
-      </button>
-      <mat-chip color="primary" selected *ngIf="sellPlaces > 0">
-        {{sellPlaces}} free spot</mat-chip>
-      <mat-chip color="warn" selected *ngIf="sellPlaces == 0">No free spot</mat-chip>
-      <mat-chip>
-        Total star:
-        <mat-chip>{{totalStar | number: '1.0-1'}}</mat-chip>
-      </mat-chip>
-    </mat-chip-list>
-  </mat-card-actions>
-</mat-card>
+<div class="cont">
+    <mat-card class="card" *ngIf="trip">
+        <div class="myHeader">
+          <h1>{{trip.name | uppercase}} </h1>
+      
+          <h3>{{trip.country | uppercase}} </h3>
+          <h5>{{trip.cost | currency: 'PLN '}}</h5>
+      
+        </div>
+        <button mat-flat-button color="primary" routerLink="/home" routerLinkActive="active">
+          <mat-icon aria-hidden="false" aria-label="Example user verified icon">arrow_back</mat-icon>Go back
+        </button>
+        <mat-card-content>
+          <mat-card class="desc">
+            <p>{{trip.description}}</p>
+            <h6>Start: {{trip.startDate | date}}</h6>
+            <h6>End: {{trip.endDate | date}}</h6>
+          </mat-card>
+          <img mat-card-image src="{{trip.photoLink}}">
+      
+      
+      
+          <app-opinion [trip]="trip" (totalS)="onVoted($event)"></app-opinion>
+      
+      
+        </mat-card-content>
+        <mat-card-actions>
+      
+      
+          <mat-chip-list aria-label="Fish selection">
+      
+            <button mat-button (click)="add()" [hidden]="trip.capacityUsed == trip.capacity">+</button>
+            <button mat-button (click)="resign()" [hidden]="trip.capacityUsed == 0">-</button>
+            <button mat-button *ngIf="isAdmin">
+              <mat-icon (click)="removeTrip()" aria-hidden="false" aria-label="Example user verified icon" routerLink="/home"
+                routerLinkActive="active">delete</mat-icon>
+            </button>
+            <mat-chip color="primary" selected *ngIf="sellPlaces > 0">
+              {{sellPlaces}} free spot</mat-chip>
+            <mat-chip color="warn" selected *ngIf="sellPlaces == 0">No free spot</mat-chip>
+            <mat-chip>
+              Total star:
+              <mat-chip>{{totalStar | number: '1.0-1'}}</mat-chip>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-actions>
+      </mat-card>
+</div>

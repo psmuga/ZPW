@@ -30,8 +30,8 @@
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="example-element-description">
               <button mat-button routerLink="/detail/{{element.id}}" routerLinkActive="active">details</button>
-              <button mat-button (click)="removeOne(element)">-</button>
-              <button mat-button (click)="addOne(element)">+</button>
+              <button mat-button (click)="removeOne(element)" [hidden]="element.capacityUsed == 0">-</button>
+              <button mat-button (click)="addOne(element)" [hidden]="element.capacityUsed == element.capacity">+</button>
             <button mat-button (click)="resign(element)">Delete</button>
           </div>
         </div>
