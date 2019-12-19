@@ -32,3 +32,16 @@ app-bucketSummary {
     display: flex;
     flex-direction: row;
 }
+
+@media screen and (max-width: 855px) {
+    .myContainer {
+        justify-content: center;
+    }
+    .view {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    app-bucketSummary {
+        width: 300px;
+    }
+}
