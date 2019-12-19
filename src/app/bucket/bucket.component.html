@@ -53,6 +53,9 @@
   <button mat-flat-button color="primary" routerLink="/home" routerLinkActive="active">
     <mat-icon aria-hidden="false" aria-label="Example user verified icon">arrow_back</mat-icon>Go back
   </button>
+  <button mat-flat-button color="primary" (click)="clear()" [disabled]="products.length == 0">
+    <mat-icon aria-hidden="false" aria-label="Example user verified icon">clear_all</mat-icon>Clear
+  </button>
   <button mat-flat-button color="primary" routerLink="/home" routerLinkActive="active" (click)="buy()" [disabled]="products.length == 0">
     <mat-icon aria-hidden="false" aria-label="Example user verified icon">payment</mat-icon>Buy
   </button>

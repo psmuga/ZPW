@@ -82,4 +82,13 @@ export class BucketComponent implements OnInit, OnChanges {
         this.basketService.clear();
         this.snackBar.open('You rock!', 'OK', { duration: 2000 });
     }
+
+    clear() {
+        this.products.forEach(product => {
+            this.resign(product);
+            product.capacityUsed = 0;
+            this.tripsService.updateTrip(product);
+        });
+        this.basketService.clear();
+    }
 }
